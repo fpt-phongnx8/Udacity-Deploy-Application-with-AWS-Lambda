@@ -1,13 +1,12 @@
 org: phongaws
 app: serverless-todo-app-v1
 service: serverless-todo-app
+frameworkVersion: '3'
 
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
   - serverless-plugin-tracing
-
-frameworkVersion: '3'
 
 custom:
   documentation:
@@ -41,8 +40,10 @@ provider:
     PROJECT_NAME: "todo-app"
     INDEX_NAME: ${self:provider.environment.TODOS_CREATED_AT_INDEX}
 
-functions:
+  logs:
+    restApi: true
 
+functions:
   Auth:
     handler: src/lambda/auth/auth0Authorizer.handler
 
